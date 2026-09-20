@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="ar-EG" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#100F0D" />
+  <title>FixPro — مسامير وقلاووظ أونلاين من الإسكندرية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #100f0d;
+      --fg: #ebe6dc;
+      --card: #1a1916;
+      --muted: #24221e;
+      --muted-fg: #9a958a;
+      --border: #2e2c28;
+      --accent: #c17a5a;
+      --accent-fg: #1a100c;
+      --steel: #c8c2b4;
+      --input: #2a2824;
+      --danger: #c0746a;
+      --shadow: 0 0 0 1px rgb(235 230 220 / 0.08);
+      --radius: 10px;
+      --font: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+      --display: "Reem Kufi", "IBM Plex Sans Arabic", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    html { -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font);
+      line-height: 1.55;
+    }
+    button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: 0.55; }
+    img, svg { display: block; max-width: 100%; }
+    h1, h2, h3 { text-wrap: balance; margin: 0; }
+    p { text-wrap: pretty; }
+
+    .wrap {
+      width: min(1152px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    header.top {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .top-inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: inherit;
+      flex-shrink: 0;
+    }
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      display: grid;
+      place-items: center;
+    }
+    .brand-name {
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+    .search {
+      position: relative;
+      flex: 1;
+      min-width: 0;
+    }
+    .search input, .field input, .field select, .field textarea {
+      width: 100%;
+      background: var(--input);
+      color: var(--fg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 40px 10px 12px;
+      font: inherit;
+      outline: none;
+    }
+    .search input:focus, .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--accent);
+    }
+    .search svg {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: var(--muted-fg);
+      pointer-events: none;
+    }
+    .icon-btn, .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 8px;
+      font: inherit;
+      font-weight: 500;
+      text-decoration: none;
+      color: inherit;
+    }
+    .btn {
+      background: var(--fg);
+      color: #141311;
+      padding: 10px 16px;
+      min-height: 42px;
+    }
+    .btn.ghost {
+      background: var(--muted);
+      color: var(--fg);
+    }
+    .btn.full { width: 100%; }
+    .cart-btn {
+      position: relative;
+      background: var(--muted);
+      color: var(--fg);
+      padding: 10px 14px;
+      min-height: 42px;
+    }
+    .badge {
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--accent-fg);
+      font-size: 12px;
+      font-weight: 600;
+      display: grid;
+      place-items: center;
+    }
+
+    main { padding: 32px 0 64px; }
+    .hero {
+      display: grid;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    @media (min-width: 1024px) {
+      .hero { grid-template-columns: 1.3fr 0.7fr; align-items: end; }
+    }
+    .kicker { color: var(--accent); font-size: 14px; margin: 0; }
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-top: 12px;
+    }
+    .lead {
+      max-width: 36rem;
+      color: var(--muted-fg);
+      margin-top: 16px;
+      font-size: 16px;
+    }
+    .cats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .cats li {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .cats p { margin: 0; }
+    .cats .blurb { margin-top: 4px; font-size: 12px; color: var(--muted-fg); }
+
+    .jobs, .filters, .product, .totals, .panel {
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .jobs {
+      padding: 20px;
+      margin-bottom: 32px;
+    }
+    .jobs h2 { font-size: 16px; }
+    .job-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .chip {
+      border: 1px solid var(--border);
+      background: var(--muted);
+      color: var(--fg);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font: inherit;
+      font-size: 13px;
+    }
+    .chip.on {
+      background: var(--fg);
+      color: #141311;
+      border-color: var(--fg);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 16px;
+    }
+    .hint { color: var(--muted-fg); font-size: 13px; margin: 6px 0 0; }
+    .filters {
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .filter-row + .filter-row { margin-top: 10px; }
+    .lab { font-size: 12px; color: var(--muted-fg); margin: 0 0 8px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 640px) { .grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+    .card:hover { box-shadow: 0 0 0 1px rgb(235 230 220 / 0.14); }
+    .thumb {
+      height: 140px;
+      border-radius: 8px;
+      background: var(--muted);
+      display: grid;
+      place-items: center;
+      color: var(--steel);
+    }
+    .thumb svg { width: 88px; height: 88px; }
+    .meta { font-size: 12px; color: var(--muted-fg); margin: 0; }
+    .name { font-size: 16px; font-weight: 600; margin: 0; }
+    .price { color: var(--steel); font-variant-numeric: tabular-nums; margin: 0; }
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--muted-fg);
+      padding: 48px 16px;
+    }
+
+    footer.site {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+    .foot {
+      display: grid;
+      gap: 32px;
+    }
+    @media (min-width: 640px) { .foot { grid-template-columns: 1fr 1fr 1fr; } }
+    .foot h3 { font-size: 14px; font-weight: 600; }
+    .foot p { color: var(--muted-fg); font-size: 14px; margin: 8px 0 0; }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgb(0 0 0 / 0.55);
+      z-index: 50;
+      display: none;
+    }
+    .overlay.show { display: block; }
+    .drawer, .modal {
+      position: fixed;
+      z-index: 60;
+      background: var(--card);
+      color: var(--fg);
+      display: none;
+    }
+    .drawer {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: min(420px, 100%);
+      box-shadow: -20px 0 60px rgb(0 0 0 / 0.4);
+      flex-direction: column;
+    }
+    .modal {
+      inset: 0;
+      overflow: auto;
+    }
+    .drawer.show, .modal.show { display: flex; }
+    .drawer-head, .modal-head {
+      padding: 20px 24px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .drawer-body { flex: 1; overflow: auto; padding: 16px 24px; }
+    .drawer-foot { border-top: 1px solid var(--border); padding: 20px 24px; }
+    .close {
+      background: transparent;
+      color: var(--muted-fg);
+      border: 0;
+      font: inherit;
+      padding: 4px 8px;
+    }
+    .line {
+      display: flex;
+      gap: 12px;
+      background: rgb(36 34 30 / 0.6);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .line .g {
+      width: 56px;
+      height: 56px;
+      background: var(--bg);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: var(--steel);
+      flex-shrink: 0;
+    }
+    .line .g svg { width: 40px; height: 40px; }
+    .grow { flex: 1; min-width: 0; }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 14px;
+    }
+    .row dt { color: var(--muted-fg); }
+    .row.strong dt, .row.strong dd { color: var(--fg); font-weight: 600; }
+    dl.bill { margin: 0; display: grid; gap: 6px; }
+    .stepper {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .stepper button {
+      width: 36px;
+      height: 36px;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 18px;
+    }
+    .stepper span {
+      min-width: 28px;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+    .trash {
+      background: transparent;
+      border: 0;
+      color: var(--muted-fg);
+      width: 40px;
+      height: 40px;
+    }
+
+    .page {
+      width: min(1152px, calc(100% - 32px));
+      margin: 24px auto 64px;
+    }
+    .split {
+      display: grid;
+      gap: 32px;
+    }
+    @media (min-width: 1024px) { .split { grid-template-columns: 1.1fr 0.9fr; } }
+    .field { display: grid; gap: 6px; margin-bottom: 14px; }
+    .field label { font-size: 13px; }
+    .field textarea { min-height: 90px; resize: vertical; padding: 10px 12px; }
+    .field select { padding: 10px 12px; }
+    .err { color: var(--danger); font-size: 13px; min-height: 1.2em; }
+    .variants { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .variant {
+      border: 1px solid var(--border);
+      background: var(--muted);
+      color: var(--fg);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: right;
+      font: inherit;
+    }
+    .variant.on { outline: 2px solid var(--accent); }
+    .product-hero {
+      display: grid;
+      gap: 24px;
+      margin-top: 20px;
+    }
+    @media (min-width: 768px) { .product-hero { grid-template-columns: 0.8fr 1.2fr; } }
+    .big-thumb {
+      background: var(--muted);
+      border-radius: 16px;
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      color: var(--steel);
+    }
+    .big-thumb svg { width: 180px; height: 180px; }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--fg);
+      color: #141311;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      z-index: 80;
+      display: none;
+    }
+    .toast.show { display: block; }
+    .hidden { display: none !important; }
+    table.details {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    table.details th, table.details td {
+      text-align: right;
+      padding: 8px 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    table.details th { color: var(--muted-fg); font-weight: 500; }
+    .ok { color: #b7c7a3; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#/" id="homeLink">
+        <span class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <rect x="9" y="3" width="6" height="2.2" rx="0.4" fill="#c17a5a"></rect>
+            <path d="M11.2 5h1.6v13L12 21l-.8-3V5Z" fill="#c8c2b4"></path>
+          </svg>
+        </span>
+        <span class="brand-name">FixPro</span>
+      </a>
+      <form class="search" id="searchForm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+        <input id="q" type="search" placeholder="دور على مسمار، قلاووظ، فيشر..." autocomplete="off" />
+      </form>
+      <button class="cart-btn" id="openCart" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h15l-1.5 9h-12z"/><path d="M6 7 5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+        <span class="hide-sm">العربية</span>
+        <span class="badge hidden" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <div id="catalogView">
+    <main class="wrap">
+      <section class="hero">
+        <div>
+          <p class="kicker">طلب أونلاين · الإسكندرية</p>
+          <h1>مسامير تمسّك الشغل.</h1>
+          <p class="lead">اطلب من الموقع، والشحن من الإسكندرية لباب الورشة أو البيت. الأسعار بالعلبة بالجنيه، والدفع كاش مع المندوب. الداتا تجريبية وبتشتغل من غير نت.</p>
+        </div>
+        <ul class="cats" id="catCards"></ul>
+      </section>
+
+      <section class="jobs">
+        <h2>حسب الشغل</h2>
+        <p class="hint">اختار نوع الشغل، والعلبة المناسبة تتحط في العربية.</p>
+        <div class="job-row" id="jobs"></div>
+      </section>
+
+      <section>
+        <div class="toolbar">
+          <div>
+            <h2>الكتالوج</h2>
+            <p class="hint" id="resultHint"></p>
+          </div>
+        </div>
+        <div class="filters">
+          <p class="lab">النوع</p>
+          <div class="filter-row" id="catFilters"></div>
+          <p class="lab" style="margin-top:12px">الخامة</p>
+          <div class="filter-row" id="matFilters"></div>
+        </div>
+        <div class="grid" id="grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="productView" class="modal">
+    <div class="page" style="width:min(960px, calc(100% - 32px))">
+      <button class="close" id="backHome" type="button">← ارجع للكتالوج</button>
+      <div id="productBody"></div>
+    </div>
+  </div>
+
+  <div id="checkoutView" class="modal">
+    <div class="page">
+      <button class="close" id="backFromCheckout" type="button">← ارجع للكتالوج</button>
+      <h1 style="font-family:var(--display);font-size:32px;margin:12px 0 8px">كمّل الطلب</h1>
+      <p class="hint">الطلب أونلاين والدفع كاش مع المندوب. بعد التأكيد بنفضي العربية ونحفظ الأوردر على جهازك.</p>
+      <div class="split" style="margin-top:24px">
+        <form id="checkoutForm">
+          <div class="field">
+            <label for="name">الاسم / اسم الورشة</label>
+            <input id="name" required minlength="3" />
+          </div>
+          <div class="field">
+            <label for="phone">موبايل (01xxxxxxxxx)</label>
+            <input id="phone" inputmode="numeric" maxlength="11" required />
+          </div>
+          <div class="field">
+            <label for="city">المدينة</label>
+            <select id="city"></select>
+          </div>
+          <div class="field">
+            <label for="district">الحي / المنطقة</label>
+            <input id="district" required minlength="2" placeholder="سيدي بشر، محرم بك، العجمي..." />
+          </div>
+          <div class="field">
+            <label for="notes">ملاحظات للمندوب</label>
+            <textarea id="notes" placeholder="مواعيد، معلم المبنى، تفاصيل التوصيل..."></textarea>
+          </div>
+          <p class="err" id="formErr"></p>
+          <button class="btn full" type="submit">أكّد الطلب</button>
+        </form>
+        <aside class="panel" style="padding:20px;height:fit-content" id="checkoutSummary"></aside>
+      </div>
+    </div>
+  </div>
+
+  <div id="orderView" class="modal">
+    <div class="page" style="max-width:640px">
+      <p class="ok" id="orderKicker">الطلب اتسجّل</p>
+      <h1 style="font-family:var(--display);font-size:32px;margin:8px 0" id="orderTitle"></h1>
+      <div class="panel" style="padding:20px;margin-top:20px" id="orderBody"></div>
+      <button class="btn ghost" style="margin-top:20px" id="newOrder" type="button">اطلب تاني</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="cart">
+    <div class="drawer-head">
+      <div class="row">
+        <h2>العربية</h2>
+        <button class="close" id="closeCart" type="button">قفل</button>
+      </div>
+      <p class="hint" id="cartHint"></p>
+    </div>
+    <div class="drawer-body" id="cartBody"></div>
+    <div class="drawer-foot" id="cartFoot"></div>
+  </aside>
+
+  <footer class="site">
+    <div class="wrap foot">
+      <div>
+        <h3 style="font-size:18px">FixPro</h3>
+        <p>مسامير وقلاووظ أونلاين من الإسكندرية. الأسعار بالجنيه، والطلب بيتحفظ على جهازك.</p>
+      </div>
+      <div>
+        <h3>الشحن</h3>
+        <p>من الإسكندرية لكل المحافظات<br />الطلب أونلاين طول اليوم<br />التوصيل خلال 1–3 أيام</p>
+      </div>
+      <div>
+        <h3>الطلب أونلاين</h3>
+        <p>اطلب من الموقع والتوصيل لبابك · مجاني فوق 600 جنيه<br />خصم جملة 8٪ من 10 علب، و15٪ من 25<br />الدفع كاش مع المندوب</p>
+      </div>
+    </div>
+  </footer>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const FREE_SHIPPING_AT = 600;
+    const SHIPPING_FEE = 50;
+    const VAT_RATE = 0.14;
+    const STORE_KEY = "fixpro-html";
+
+    const CATEGORIES = [
+      { id: "wood-nails", label: "مسامير خشب", blurb: "نجارة وأبواب وأثاث" },
+      { id: "steel-nails", label: "مسامير حديد", blurb: "خرسانة وأسقف" },
+      { id: "screws", label: "قلاووظ", blurb: "خشب وجيبسوم" },
+      { id: "anchors", label: "فيشر وتثبيت", blurb: "حيطان وخرسانة" },
+      { id: "bolts", label: "مسامير وصمول", blurb: "سداسي وورد" }
+    ];
+
+    const MATERIALS = [
+      { id: "galvanized", label: "مجلفن" },
+      { id: "steel", label: "حديد" },
+      { id: "stainless", label: "استانلس" },
+      { id: "copper", label: "نحاس" },
+      { id: "nylon", label: "بلاستيك" }
+    ];
+
+    const CITIES = ["الإسكندرية","القاهرة","الجيزة","المنصورة","طنطا","الزقازيق","شبرا الخيمة","6 أكتوبر","العاشر من رمضان","بورسعيد","الإسماعيلية","السويس","أسيوط","سوهاج","الأقصر","أسوان"];
+
+    function v(id, label, lengthMm, diameterMm, packSize, unit, price, stock) {
+      return { id, label, lengthMm, diameterMm, packSize, unit, price, stock };
+    }
+
+    const PRODUCTS = [
+      {
+        id: "wood-sink",
+        name: "مسمار خشب غاطس",
+        subtitle: "راس غاطس · جسم ناعم",
+        category: "wood-nails",
+        material: "galvanized",
+        glyph: "nail-sink",
+        head: "غاطس",
+        use: "نجارة ظاهرة، أبواب، براويز",
+        description: "مسمار خشب راسه غاطس بيدخل مع وش الخشب ومش بيبرز. حلو للأبواب والإطارات والتشطيب النضيف.",
+        featured: true,
+        variants: [
+          v("wood-sink-25", "1 بوصة · 25 مم", 25, 2.0, 500, "علبة", 55, 42),
+          v("wood-sink-38", "1½ بوصة · 38 مم", 38, 2.5, 400, "علبة", 65, 36),
+          v("wood-sink-50", "2 بوصة · 50 مم", 50, 2.8, 350, "علبة", 75, 58),
+          v("wood-sink-63", "2½ بوصة · 63 مم", 63, 3.0, 250, "علبة", 90, 24),
+          v("wood-sink-75", "3 بوصة · 75 مم", 75, 3.4, 200, "علبة", 100, 19),
+          v("wood-sink-100", "4 بوصة · 100 مم", 100, 4.0, 150, "علبة", 110, 11)
+        ]
+      },
+      {
+        id: "wood-common",
+        name: "مسمار خشب عادي",
+        subtitle: "راس مسطّح · شغل يومي",
+        category: "wood-nails",
+        material: "steel",
+        glyph: "nail-flat",
+        head: "مسطح",
+        use: "هياكل خشب، صناديق، ورش",
+        description: "مسمار عادي راسه مسطح وماسك كويس. شغل الورشة اليومي: صناديق وهياكل وخشب مش محتاج تشطيب ناعم.",
+        featured: true,
+        variants: [
+          v("wood-common-50", "2 بوصة · 50 مم", 50, 2.8, 400, "علبة", 60, 64),
+          v("wood-common-75", "3 بوصة · 75 مم", 75, 3.4, 280, "علبة", 75, 41),
+          v("wood-common-100", "4 بوصة · 100 مم", 100, 4.2, 180, "علبة", 95, 22),
+          v("wood-common-125", "5 بوصة · 125 مم", 125, 5.0, 120, "علبة", 110, 9)
+        ]
+      },
+      {
+        id: "finishing",
+        name: "مسمار تشطيب ناعم",
+        subtitle: "راس صغير · بيتغطى بالبوية",
+        category: "wood-nails",
+        material: "steel",
+        glyph: "nail-finish",
+        head: "رفيع",
+        use: "كرانيش، براويز، ديكور خشب",
+        description: "مسمار تشطيب راسه رفيع بيندفن في الخشب ويتغطى بالمعجون والبوية. للكرانيش والبراويز والشغل الظاهر.",
+        variants: [
+          v("finishing-25", "1 بوصة · 25 مم", 25, 1.4, 600, "علبة", 50, 27),
+          v("finishing-38", "1½ بوصة · 38 مم", 38, 1.6, 500, "علبة", 60, 18),
+          v("finishing-50", "2 بوصة · 50 مم", 50, 1.8, 400, "علبة", 70, 14)
+        ]
+      },
+      {
+        id: "concrete",
+        name: "مسمار خرسانة",
+        subtitle: "حديد مقوّى · طرف حامي",
+        category: "steel-nails",
+        material: "steel",
+        glyph: "nail-concrete",
+        head: "مسطح تقيل",
+        use: "تثبيت على طوب وخرسانة",
+        description: "مسمار حديد مقوّى بيتدق في الطوب والخرسانة. بيتباع بالكيلو، ينفع تثبّت بيه خشب وعلاقات على الحيطة.",
+        featured: true,
+        variants: [
+          v("concrete-25", "1 بوصة · 25 مم", 25, 2.5, 1, "كيلو", 65, 80),
+          v("concrete-40", "1½ بوصة · 40 مم", 40, 3.0, 1, "كيلو", 80, 54),
+          v("concrete-50", "2 بوصة · 50 مم", 50, 3.5, 1, "كيلو", 90, 47),
+          v("concrete-75", "3 بوصة · 75 مم", 75, 4.0, 1, "كيلو", 105, 21)
+        ]
+      },
+      {
+        id: "roofing",
+        name: "مسمار سقف مجلفن",
+        subtitle: "وردة مدمجة · ضد الصدأ",
+        category: "steel-nails",
+        material: "galvanized",
+        glyph: "nail-roof",
+        head: "عريض بوردة",
+        use: "عزل، ألواح، أسطح",
+        description: "مسمار سقف راسه عريض ووردة مدمجة، مجلفن ضد الرطوبة. بيمسك الألواح والعزل على الأسطح الخشب.",
+        variants: [
+          v("roofing-25", "1 بوصة · 25 مم", 25, 3.0, 250, "علبة", 85, 33),
+          v("roofing-38", "1½ بوصة · 38 مم", 38, 3.2, 200, "علبة", 100, 26),
+          v("roofing-50", "2 بوصة · 50 مم", 50, 3.5, 160, "علبة", 110, 17)
+        ]
+      },
+      {
+        id: "copper",
+        name: "مسمار نحاس ديكور",
+        subtitle: "نحاس أصفر · راس زينة",
+        category: "wood-nails",
+        material: "copper",
+        glyph: "nail-copper",
+        head: "قبة نحاس",
+        use: "تنجيد، أبواب قديمة، ديكور",
+        description: "مسمار نحاس راسه قبة باين. للتنجيد والأبواب القديمة والشغل اللي المسمار فيه جزء من الشكل.",
+        variants: [
+          v("copper-16", "⅝ بوصة · 16 مم", 16, 2.0, 100, "علبة", 165, 12),
+          v("copper-20", "¾ بوصة · 20 مم", 20, 2.2, 80, "علبة", 195, 8),
+          v("copper-25", "1 بوصة · 25 مم", 25, 2.5, 60, "علبة", 225, 5)
+        ]
+      },
+      {
+        id: "wood-screw",
+        name: "قلاووظ خشب صليبة",
+        subtitle: "سنّ غويط · راس غاطس",
+        category: "screws",
+        material: "galvanized",
+        glyph: "screw",
+        head: "غاطس صليبة",
+        use: "أثاث، مفصليّات، تجميع خشب",
+        description: "قلاووظ خشب سنّه غويط وراسه غاطس صليبة. بيتفك ويتتركب أكتر من مرة، أحسن من المسمار لو الشغل محتاج صيانة.",
+        featured: true,
+        variants: [
+          v("wood-screw-20", "20 مم", 20, 3.5, 200, "علبة", 65, 44),
+          v("wood-screw-30", "30 مم", 30, 4.0, 200, "علبة", 75, 39),
+          v("wood-screw-40", "40 مم", 40, 4.5, 150, "علبة", 90, 31),
+          v("wood-screw-50", "50 مم", 50, 5.0, 120, "علبة", 100, 22),
+          v("wood-screw-70", "70 مم", 70, 5.0, 80, "علبة", 120, 13)
+        ]
+      },
+      {
+        id: "drywall",
+        name: "مسمار ألواح جيبسوم",
+        subtitle: "سن ناعم · راس بوق",
+        category: "screws",
+        material: "steel",
+        glyph: "screw",
+        head: "بوق صليبة",
+        use: "جيبسوم بورد على حديد أو خشب",
+        description: "مسمار جيبسوم راسه بوق بيغوص في اللوح من غير ما يمزّق الورق. للأسقف والحيطان، على مجاري حديد أو خشب.",
+        variants: [
+          v("drywall-25", "25 مم", 25, 3.5, 500, "علبة", 70, 51),
+          v("drywall-35", "35 مم", 35, 3.5, 400, "علبة", 85, 37),
+          v("drywall-50", "50 مم", 50, 3.9, 250, "علبة", 100, 16)
+        ]
+      },
+      {
+        id: "lag",
+        name: "قلاووظ خشب تقيل",
+        subtitle: "راس سداسي · مسكة قوية",
+        category: "screws",
+        material: "galvanized",
+        glyph: "lag",
+        head: "سداسي",
+        use: "عروق، درابزين، أحمال",
+        description: "قلاووظ خشب راسه سداسي بيستحمل حمل أكبر من القلاووظ العادي. لتثبيت العروق والدرابزين والخشب التقيل.",
+        variants: [
+          v("lag-50", "50 مم · 6 مم", 50, 6, 40, "علبة", 130, 18),
+          v("lag-80", "80 مم · 8 مم", 80, 8, 30, "علبة", 175, 11),
+          v("lag-100", "100 مم · 10 مم", 100, 10, 20, "علبة", 225, 7)
+        ]
+      },
+      {
+        id: "hex-bolt",
+        name: "مسمار سداسي بصمولة",
+        subtitle: "طقم كامل · صمولة ووردة",
+        category: "bolts",
+        material: "galvanized",
+        glyph: "bolt",
+        head: "سداسي",
+        use: "حديد، أرفف، معدات",
+        description: "مسمار سداسي بالصمول والوردة في نفس العلبة. شغل الحديد والأرفف والمعدات اللي محتاجة فك وتركيب.",
+        variants: [
+          v("hex-bolt-m6", "M6 × 30 مم", 30, 6, 50, "علبة", 105, 28),
+          v("hex-bolt-m8", "M8 × 40 مم", 40, 8, 40, "علبة", 140, 23),
+          v("hex-bolt-m10", "M10 × 50 مم", 50, 10, 25, "علبة", 175, 14),
+          v("hex-bolt-m12", "M12 × 60 مم", 60, 12, 20, "علبة", 210, 8)
+        ]
+      },
+      {
+        id: "hex-nut",
+        name: "صمولة سداسي",
+        subtitle: "متري · تشطيب مجلفن",
+        category: "bolts",
+        material: "galvanized",
+        glyph: "nut",
+        head: "سداسي",
+        use: "بدل وصيانة",
+        description: "صمول سداسي مجلفن بالمقاس المتري. علب احتياطي للورشة لو الصمولة ضاعت أو محتاج قفل زيادة.",
+        variants: [
+          v("hex-nut-m6", "M6", 0, 6, 100, "علبة", 40, 40),
+          v("hex-nut-m8", "M8", 0, 8, 80, "علبة", 55, 33),
+          v("hex-nut-m10", "M10", 0, 10, 60, "علبة", 65, 21),
+          v("hex-nut-m12", "M12", 0, 12, 40, "علبة", 75, 15)
+        ]
+      },
+      {
+        id: "washer",
+        name: "وردة حديد",
+        subtitle: "حلقة تسوية · مجلفنة",
+        category: "bolts",
+        material: "galvanized",
+        glyph: "washer",
+        head: "حلقة",
+        use: "تحت الراس أو الصمولة",
+        description: "ورد حديد بيوزّع الضغط تحت راس المسمار أو الصمولة وبيمنع المعدن يغوص في الخشب.",
+        variants: [
+          v("washer-m6", "M6", 0, 6, 150, "علبة", 30, 48),
+          v("washer-m8", "M8", 0, 8, 120, "علبة", 35, 36),
+          v("washer-m10", "M10", 0, 10, 80, "علبة", 45, 22)
+        ]
+      },
+      {
+        id: "wall-plug",
+        name: "فيشر حيطة مع مسمار",
+        subtitle: "بلاستيك + مسمار · طقم جاهز",
+        category: "anchors",
+        material: "nylon",
+        glyph: "plug",
+        head: "صليبة",
+        use: "أرفف، براويز، علاقات",
+        description: "فيشر حيطة بلاستيك مع المسمار بتاعه. للطوب والحيطان الفاضية. كل فيشر في العلبة معاه مسماره.",
+        featured: true,
+        variants: [
+          v("wall-plug-6", "6 مم", 30, 6, 100, "علبة", 55, 62),
+          v("wall-plug-8", "8 مم", 40, 8, 80, "علبة", 70, 44),
+          v("wall-plug-10", "10 مم", 50, 10, 50, "علبة", 90, 19)
+        ]
+      },
+      {
+        id: "sleeve-anchor",
+        name: "فيشر خرسانة معدني",
+        subtitle: "جلبة تمدد · حمل تقيل",
+        category: "anchors",
+        material: "steel",
+        glyph: "anchor",
+        head: "سداسي",
+        use: "مواتير، درابزين، حديد على خرسانة",
+        description: "فيشر معدني بجلبة بتتمدد جوه الخرسانة. للحمل التقيل: درابزين، زوايا حديد، قواعد مواتير صغيرة.",
+        variants: [
+          v("sleeve-m8", "M8 × 75 مم", 75, 8, 20, "علبة", 165, 16),
+          v("sleeve-m10", "M10 × 90 مم", 90, 10, 16, "علبة", 205, 11),
+          v("sleeve-m12", "M12 × 100 مم", 100, 12, 10, "علبة", 260, 6)
+        ]
+      }
+    ];
+
+    const JOBS = [
+      { id: "door", label: "باب خشب", detail: "إطار ومفصليّات وتشطيب ظاهر", lines: [{ productId: "wood-sink", variantId: "wood-sink-50", qty: 1 }, { productId: "wood-screw", variantId: "wood-screw-40", qty: 1 }] },
+      { id: "fence", label: "سور 10 متر", detail: "ألواح على عرق خشب", lines: [{ productId: "wood-common", variantId: "wood-common-75", qty: 3 }, { productId: "lag", variantId: "lag-80", qty: 1 }] },
+      { id: "deck", label: "سطح خشب 12 م²", detail: "ألواح وعزل على روافد", lines: [{ productId: "roofing", variantId: "roofing-38", qty: 4 }, { productId: "lag", variantId: "lag-100", qty: 2 }] },
+      { id: "drywall", label: "حيطة جيبسوم 3×4", detail: "لوح على مجاري حديد", lines: [{ productId: "drywall", variantId: "drywall-25", qty: 2 }] },
+      { id: "shelf", label: "رف على الحيطة", detail: "تثبيت في طوب", lines: [{ productId: "wall-plug", variantId: "wall-plug-8", qty: 1 }, { productId: "sleeve-anchor", variantId: "sleeve-m8", qty: 1 }] }
+    ];
+
+    const GLYPHS = {
+      "nail-sink": '<svg viewBox="0 0 80 80" fill="none"><path d="M36 14h8l-1.2 4H37.2L36 14Z" fill="currentColor"/><path d="M38.6 18h2.8v42l-1.4 12-1.4-12V18Z" fill="currentColor"/></svg>',
+      "nail-flat": '<svg viewBox="0 0 80 80" fill="none"><rect x="30" y="12" width="20" height="4" rx="0.8" fill="currentColor"/><path d="M38.2 16h3.6v46l-1.8 12-1.8-12V16Z" fill="currentColor"/></svg>',
+      "nail-finish": '<svg viewBox="0 0 80 80" fill="none"><rect x="36" y="12" width="8" height="2.2" rx="0.6" fill="currentColor"/><path d="M38.8 14h2.4v48l-1.2 12-1.2-12V14Z" fill="currentColor"/></svg>',
+      "nail-concrete": '<svg viewBox="0 0 80 80" fill="none"><rect x="28" y="12" width="24" height="5" rx="0.8" fill="currentColor"/><path d="M37.4 17h5.2v44l-2.6 13-2.6-13V17Z" fill="currentColor"/></svg>',
+      "nail-roof": '<svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="18" r="10" stroke="currentColor" stroke-width="2"/><rect x="32" y="14" width="16" height="4" rx="0.6" fill="currentColor"/><path d="M38.4 18h3.2v44l-1.6 12-1.6-12V18Z" fill="currentColor"/></svg>',
+      "nail-copper": '<svg viewBox="0 0 80 80" fill="none" style="color:#c17a5a"><ellipse cx="40" cy="16" rx="8" ry="6" fill="currentColor"/><path d="M38.6 20h2.8v42l-1.4 12-1.4-12V20Z" fill="currentColor"/></svg>',
+      "screw": '<svg viewBox="0 0 80 80" fill="none"><path d="M32 12h16l-2 6H34l-2-6Z" fill="currentColor"/><path d="M38.4 18h3.2v38" stroke="currentColor" stroke-width="3.2"/><path d="M36 24h8M35 30h10M35 36h10M35.5 42h9M36 48h8M37 54h6" stroke="currentColor" stroke-width="1.4"/><path d="M40 56l-2.2 10h4.4L40 56Z" fill="currentColor"/></svg>',
+      "lag": '<svg viewBox="0 0 80 80" fill="none"><path d="M28 14h24v8l-4 4H32l-4-4V14Z" fill="currentColor"/><path d="M37.6 26h4.8v32" stroke="currentColor" stroke-width="4.2"/><path d="M33 32h14M32 40h16M33 48h14M35 56h10" stroke="currentColor" stroke-width="1.6"/><path d="M40 58 36 70h8L40 58Z" fill="currentColor"/></svg>',
+      "bolt": '<svg viewBox="0 0 80 80" fill="none"><path d="M28 10h24l-3 8H31l-3-8Z" fill="currentColor"/><rect x="36" y="18" width="8" height="34" fill="currentColor"/><rect x="30" y="46" width="20" height="8" fill="currentColor"/><rect x="32" y="56" width="16" height="6" stroke="currentColor" stroke-width="1.6"/><rect x="36" y="62" width="8" height="8" fill="currentColor"/></svg>',
+      "nut": '<svg viewBox="0 0 80 80" fill="none"><path d="M40 16 58 26v28L40 64 22 54V26L40 16Z" stroke="currentColor" stroke-width="2.4"/><circle cx="40" cy="40" r="9" stroke="currentColor" stroke-width="2.4"/></svg>',
+      "washer": '<svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="22" stroke="currentColor" stroke-width="3"/><circle cx="40" cy="40" r="10" stroke="currentColor" stroke-width="3"/></svg>',
+      "plug": '<svg viewBox="0 0 80 80" fill="none"><path d="M30 14h20v10l4 8v28l-8 8H34l-8-8V32l4-8V14Z" stroke="currentColor" stroke-width="2.2"/><path d="M34 18h12v6H34z" fill="currentColor"/></svg>',
+      "anchor": '<svg viewBox="0 0 80 80" fill="none"><rect x="34" y="10" width="12" height="10" fill="currentColor"/><rect x="37" y="20" width="6" height="28" fill="currentColor"/><path d="M28 48h24l-4 18H32l-4-18Z" fill="currentColor"/></svg>'
+    };
+
+    const egpFmt = new Intl.NumberFormat("ar-EG", { style: "currency", currency: "EGP", numberingSystem: "latn", maximumFractionDigits: 0 });
+    const numFmt = new Intl.NumberFormat("ar-EG", { numberingSystem: "latn", maximumFractionDigits: 0 });
+    const egp = (n) => egpFmt.format(n);
+    const count = (n) => numFmt.format(n);
+    const materialLabel = (id) => (MATERIALS.find((m) => m.id === id) || {}).label || id;
+    const categoryLabel = (id) => (CATEGORIES.find((c) => c.id === id) || {}).label || id;
+    const getProduct = (id) => PRODUCTS.find((p) => p.id === id);
+    const getVariant = (p, id) => p.variants.find((x) => x.id === id);
+    const minPrice = (p) => Math.min(...p.variants.map((x) => x.price));
+    const phoneDigits = (v) => String(v).replace(/[^\d]/g, "").slice(0, 11);
+    const isEgyptianMobile = (v) => /^01[0125]\d{8}$/.test(phoneDigits(v));
+
+    function discountRateFor(packs) {
+      if (packs >= 25) return 0.15;
+      if (packs >= 10) return 0.08;
+      return 0;
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORE_KEY);
+        if (!raw) return { lines: [], orders: [] };
+        const parsed = JSON.parse(raw);
+        return { lines: parsed.lines || [], orders: parsed.orders || [] };
+      } catch (e) {
+        return { lines: [], orders: [] };
+      }
+    }
+
+    const state = loadState();
+    function save() {
+      localStorage.setItem(STORE_KEY, JSON.stringify({ lines: state.lines, orders: state.orders }));
+    }
+
+    function summarize() {
+      const resolved = [];
+      for (const line of state.lines) {
+        const product = getProduct(line.productId);
+        const variant = product ? getVariant(product, line.variantId) : null;
+        if (!product || !variant) continue;
+        resolved.push({ ...line, product, variant, lineTotal: variant.price * line.qty });
+      }
+      const packs = resolved.reduce((s, l) => s + l.qty, 0);
+      const subtotal = resolved.reduce((s, l) => s + l.lineTotal, 0);
+      const discountRate = discountRateFor(packs);
+      const discount = Math.round(subtotal * discountRate * 100) / 100;
+      const after = subtotal - discount;
+      const shipping = after >= FREE_SHIPPING_AT || packs === 0 ? 0 : SHIPPING_FEE;
+      const vat = Math.round((after + shipping) * VAT_RATE * 100) / 100;
+      const total = Math.round((after + shipping + vat) * 100) / 100;
+      return { resolved, packs, subtotal, discountRate, discount, shipping, vat, total };
+    }
+
+    function addToCart(productId, variantId, qty) {
+      qty = qty || 1;
+      const product = getProduct(productId);
+      const variant = product ? getVariant(product, variantId) : null;
+      if (!product || !variant) return;
+      const existing = state.lines.find((l) => l.variantId === variantId);
+      if (existing) {
+        existing.qty = Math.min(variant.stock, existing.qty + qty);
+      } else {
+        state.lines.push({ productId, variantId, qty: Math.min(variant.stock, qty) });
+      }
+      save();
+      renderCart();
+      toast("اتحط في العربية");
+    }
+
+    function setQty(variantId, qty) {
+      if (qty <= 0) {
+        state.lines = state.lines.filter((l) => l.variantId !== variantId);
+      } else {
+        const line = state.lines.find((l) => l.variantId === variantId);
+        if (!line) return;
+        const product = getProduct(line.productId);
+        const variant = product ? getVariant(product, variantId) : null;
+        line.qty = Math.min(variant ? variant.stock : qty, qty);
+      }
+      save();
+      renderCart();
+      if (location.hash.startsWith("#/checkout")) renderCheckout();
+    }
+
+    function addJob(job) {
+      job.lines.forEach((l) => addToCart(l.productId, l.variantId, l.qty));
+    }
+
+    function placeOrder(input) {
+      const sum = summarize();
+      if (sum.resolved.length === 0) return null;
+      const order = {
+        id: "FXP-" + Date.now().toString(36).toUpperCase(),
+        createdAt: new Date().toISOString(),
+        ...input,
+        packs: sum.packs,
+        subtotal: sum.subtotal,
+        discountRate: sum.discountRate,
+        discount: sum.discount,
+        shipping: sum.shipping,
+        vat: sum.vat,
+        total: sum.total,
+        lines: sum.resolved.map((l) => ({
+          productId: l.productId,
+          productName: l.product.name,
+          variantId: l.variantId,
+          variantLabel: l.variant.label,
+          unit: l.variant.unit,
+          qty: l.qty,
+          price: l.variant.price
+        }))
+      };
+      state.orders = [order, ...state.orders].slice(0, 12);
+      state.lines = [];
+      save();
+      return order;
+    }
+
+    let filters = { category: "all", material: "all", q: "" };
+    let selectedVariant = {};
+
+    function toast(msg) {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => el.classList.remove("show"), 1800);
+    }
+
+    function billHtml(sum) {
+      return `
+        <dl class="bill">
+          <div class="row"><dt>المجموع</dt><dd>${egp(sum.subtotal)}</dd></div>
+          ${sum.discount > 0 ? `<div class="row"><dt>خصم جملة</dt><dd>− ${egp(sum.discount)}</dd></div>` : ""}
+          <div class="row"><dt>التوصيل</dt><dd>${sum.shipping === 0 ? "مجاني" : egp(sum.shipping)}</dd></div>
+          <div class="row"><dt>ضريبة 14٪</dt><dd>${egp(sum.vat)}</dd></div>
+          <div class="row strong"><dt>الإجمالي</dt><dd>${egp(sum.total)}</dd></div>
+        </dl>`;
+    }
+
+    function renderChips(target, items, current, onPick, allLabel) {
+      const html = [`<button class="chip ${current === "all" ? "on" : ""}" data-id="all" type="button">${allLabel}</button>`]
+        .concat(items.map((item) => `<button class="chip ${current === item.id ? "on" : ""}" data-id="${item.id}" type="button">${item.label}</button>`))
+        .join("");
+      target.innerHTML = html;
+      target.querySelectorAll("button").forEach((btn) => {
+        btn.onclick = () => onPick(btn.dataset.id);
+      });
+    }
+
+    function renderCatalog() {
+      document.getElementById("catCards").innerHTML = CATEGORIES.map((c) => `<li><p><strong>${c.label}</strong></p><p class="blurb">${c.blurb}</p></li>`).join("");
+      document.getElementById("jobs").innerHTML = JOBS.map((j) => `<button class="chip" data-job="${j.id}" type="button" title="${j.detail}">${j.label}</button>`).join("");
+      document.getElementById("jobs").querySelectorAll("button").forEach((btn) => {
+        btn.onclick = () => {
+          const job = JOBS.find((j) => j.id === btn.dataset.job);
+          addJob(job);
+          toast(job.label + " اتضاف للعربية");
+        };
+      });
+      renderChips(document.getElementById("catFilters"), CATEGORIES, filters.category, (id) => { filters.category = id; renderCatalog(); }, "الكل");
+      renderChips(document.getElementById("matFilters"), MATERIALS, filters.material, (id) => { filters.material = id; renderCatalog(); }, "كل الخامات");
+
+      const needle = filters.q.trim().toLowerCase();
+      const list = PRODUCTS.filter((p) => {
+        if (filters.category !== "all" && p.category !== filters.category) return false;
+        if (filters.material !== "all" && p.material !== filters.material) return false;
+        if (!needle) return true;
+        const hay = [p.name, p.subtitle, p.use, p.head, p.description, ...p.variants.map((x) => x.label)].join(" ").toLowerCase();
+        return hay.includes(needle);
+      });
+      document.getElementById("resultHint").textContent = count(list.length) + " صنف";
+      const grid = document.getElementById("grid");
+      if (!list.length) {
+        grid.innerHTML = '<p class="empty">مفيش حاجة بالمواصفات دي. غيّر الفلتر أو امسح البحث.</p>';
+        return;
+      }
+      grid.innerHTML = list.map((p) => `
+        <article class="card">
+          <div class="thumb">${GLYPHS[p.glyph] || ""}</div>
+          <p class="meta">${categoryLabel(p.category)} · ${materialLabel(p.material)}</p>
+          <h3 class="name">${p.name}</h3>
+          <p class="meta">${p.subtitle}</p>
+          <p class="price">من ${egp(minPrice(p))}</p>
+          <button class="btn full" data-open="${p.id}" type="button">شوف المقاسات</button>
+        </article>`).join("");
+      grid.querySelectorAll("[data-open]").forEach((btn) => {
+        btn.onclick = () => { location.hash = "#/p/" + btn.dataset.open; };
+      });
+    }
+
+    function renderProduct(id) {
+      const p = getProduct(id);
+      if (!p) { location.hash = "#/"; return; }
+      const vid = selectedVariant[p.id] || p.variants[0].id;
+      const variant = getVariant(p, vid) || p.variants[0];
+      document.getElementById("productBody").innerHTML = `
+        <div class="product-hero">
+          <div class="big-thumb">${GLYPHS[p.glyph] || ""}</div>
+          <div>
+            <p class="kicker">${categoryLabel(p.category)} · ${materialLabel(p.material)}</p>
+            <h1 style="font-family:var(--display);font-size:36px;margin-top:8px">${p.name}</h1>
+            <p class="lead">${p.description}</p>
+            <p class="meta">الراس: ${p.head} · الاستخدام: ${p.use}</p>
+            <div class="variants">
+              ${p.variants.map((x) => `<button class="variant ${x.id === variant.id ? "on" : ""}" data-vid="${x.id}" type="button"><strong>${x.label}</strong><br/><span class="meta">${egp(x.price)} / ${x.unit} · المخزون ${count(x.stock)}</span></button>`).join("")}
+            </div>
+            <p class="price" style="font-size:22px;margin:12px 0">${egp(variant.price)} / ${variant.unit}</p>
+            <button class="btn" id="addBtn" type="button">حط في العربية</button>
+          </div>
+        </div>
+        <h3 style="margin:28px 0 10px">جدول المقاسات</h3>
+        <div class="panel" style="padding:8px 12px;overflow:auto">
+          <table class="details">
+            <thead><tr><th>المقاس</th><th>الطول</th><th>القطر</th><th>التعبئة</th><th>السعر</th><th>المخزون</th></tr></thead>
+            <tbody>
+              ${p.variants.map((x) => `<tr title="${p.name} ${x.label}"><td>${x.label}</td><td>${x.lengthMm ? x.lengthMm + " مم" : "—"}</td><td>${x.diameterMm} مم</td><td>${count(x.packSize)} / ${x.unit}</td><td>${egp(x.price)}</td><td>${count(x.stock)}</td></tr>`).join("")}
+            </tbody>
+          </table>
+        </div>`;
+      document.getElementById("productBody").querySelectorAll("[data-vid]").forEach((btn) => {
+        btn.onclick = () => { selectedVariant[p.id] = btn.dataset.vid; renderProduct(p.id); };
+      });
+      document.getElementById("addBtn").onclick = () => addToCart(p.id, variant.id, 1);
+    }
+
+    function renderCart() {
+      const sum = summarize();
+      const badge = document.getElementById("cartCount");
+      if (sum.packs > 0) {
+        badge.textContent = count(sum.packs);
+        badge.classList.remove("hidden");
+      } else {
+        badge.classList.add("hidden");
+      }
+      document.getElementById("cartHint").textContent = sum.packs === 0
+        ? "لسه فاضية. الكتالوج فيه المسامير والقلاووظ."
+        : count(sum.packs) + " أصناف جاهزين للطلب.";
+      const body = document.getElementById("cartBody");
+      if (!sum.resolved.length) {
+        body.innerHTML = '<p class="empty">العربية فاضية</p>';
+      } else {
+        body.innerHTML = sum.resolved.map((l) => `
+          <div class="line">
+            <div class="g">${GLYPHS[l.product.glyph] || ""}</div>
+            <div class="grow">
+              <p class="name" style="font-size:14px">${l.product.name}</p>
+              <p class="meta">${l.variant.label}</p>
+              <p class="price">${egp(l.variant.price)} / ${l.variant.unit}</p>
+              <div class="row" style="margin-top:8px">
+                <div class="stepper">
+                  <button type="button" data-minus="${l.variantId}">−</button>
+                  <span>${count(l.qty)}</span>
+                  <button type="button" data-plus="${l.variantId}">+</button>
+                </div>
+                <button class="trash" data-del="${l.variantId}" type="button">حذف</button>
+              </div>
+            </div>
+          </div>`).join("");
+        body.querySelectorAll("[data-minus]").forEach((b) => b.onclick = () => setQty(b.dataset.minus, (state.lines.find((l) => l.variantId === b.dataset.minus) || {}).qty - 1));
+        body.querySelectorAll("[data-plus]").forEach((b) => b.onclick = () => setQty(b.dataset.plus, ((state.lines.find((l) => l.variantId === b.dataset.plus) || {}).qty || 0) + 1));
+        body.querySelectorAll("[data-del]").forEach((b) => b.onclick = () => setQty(b.dataset.del, 0));
+      }
+      const toFree = Math.max(0, FREE_SHIPPING_AT - (sum.subtotal - sum.discount));
+      const packs = sum.packs;
+      const toWholesale = packs === 0 ? 10 : packs < 10 ? 10 - packs : packs < 25 ? 25 - packs : 0;
+      const nextRate = packs < 10 ? "8٪" : "15٪";
+      const note = packs === 0 ? "" : `<p class="hint">${sum.discountRate > 0 ? "خصم جملة " + Math.round(sum.discountRate * 100) + "٪ شغال." : "زوّد " + count(toWholesale) + " علب كمان وخصم الجملة " + nextRate + " يتفعّل."}${sum.shipping > 0 ? " باقي " + egp(toFree) + " على التوصيل المجاني." : " التوصيل على الحساب ده مجاني."}</p>`;
+      document.getElementById("cartFoot").innerHTML = `
+        ${note}
+        ${billHtml(sum)}
+        <button class="btn full" style="margin-top:14px" id="goCheckout" ${packs === 0 ? "disabled" : ""} type="button">كمّل الطلب</button>`;
+      const go = document.getElementById("goCheckout");
+      if (go && packs > 0) go.onclick = () => { closeCart(); location.hash = "#/checkout"; };
+    }
+
+    function renderCheckout() {
+      const sum = summarize();
+      const city = document.getElementById("city");
+      if (!city.dataset.ready) {
+        city.innerHTML = CITIES.map((c) => `<option value="${c}">${c}</option>`).join("");
+        city.value = "الإسكندرية";
+        city.dataset.ready = "1";
+      }
+      document.getElementById("checkoutSummary").innerHTML = sum.packs === 0
+        ? '<p>العربية فاضية. حط أصناف من الكتالوج الأول.</p>'
+        : billHtml(sum) + sum.resolved.map((l) => `<p class="meta" style="margin-top:8px">${l.product.name} · ${l.variant.label} × ${count(l.qty)}</p>`).join("");
+    }
+
+    function renderOrder(id) {
+      const order = state.orders.find((o) => o.id === id);
+      if (!order) { location.hash = "#/"; return; }
+      document.getElementById("orderTitle").textContent = order.id;
+      document.getElementById("orderBody").innerHTML = `
+        <p>${order.name} · ${order.phone}</p>
+        <p class="meta">${order.city} — ${order.district}</p>
+        ${order.notes ? `<p class="meta">${order.notes}</p>` : ""}
+        <hr style="border:0;border-top:1px solid var(--border);margin:16px 0" />
+        ${order.lines.map((l) => `<p>${l.productName} · ${l.variantLabel} × ${count(l.qty)} — ${egp(l.price * l.qty)}</p>`).join("")}
+        <div style="margin-top:16px">${billHtml(order)}</div>
+        <p class="hint" style="margin-top:12px">الدفع كاش مع المندوب · الشحن من الإسكندرية</p>`;
+    }
+
+    function show(view) {
+      document.getElementById("catalogView").classList.toggle("hidden", view !== "catalog");
+      document.querySelector("footer.site").classList.toggle("hidden", view !== "catalog");
+      document.getElementById("productView").classList.toggle("show", view === "product");
+      document.getElementById("checkoutView").classList.toggle("show", view === "checkout");
+      document.getElementById("orderView").classList.toggle("show", view === "order");
+    }
+
+    function route() {
+      const hash = location.hash || "#/";
+      if (hash.startsWith("#/p/")) {
+        show("product");
+        renderProduct(hash.slice(4));
+      } else if (hash.startsWith("#/checkout")) {
+        show("checkout");
+        renderCheckout();
+      } else if (hash.startsWith("#/order/")) {
+        show("order");
+        renderOrder(hash.slice(8));
+      } else {
+        show("catalog");
+        renderCatalog();
+      }
+      renderCart();
+    }
+
+    function openCart() {
+      document.getElementById("cart").classList.add("show");
+      document.getElementById("overlay").classList.add("show");
+      renderCart();
+    }
+    function closeCart() {
+      document.getElementById("cart").classList.remove("show");
+      document.getElementById("overlay").classList.remove("show");
+    }
+
+    document.getElementById("openCart").onclick = openCart;
+    document.getElementById("closeCart").onclick = closeCart;
+    document.getElementById("overlay").onclick = closeCart;
+    document.getElementById("homeLink").onclick = (e) => { e.preventDefault(); location.hash = "#/"; };
+    document.getElementById("backHome").onclick = () => { location.hash = "#/"; };
+    document.getElementById("backFromCheckout").onclick = () => { location.hash = "#/"; };
+    document.getElementById("newOrder").onclick = () => { location.hash = "#/"; };
+    document.getElementById("q").oninput = (e) => { filters.q = e.target.value; renderCatalog(); };
+    document.getElementById("searchForm").onsubmit = (e) => { e.preventDefault(); renderCatalog(); };
+    document.getElementById("phone").oninput = (e) => { e.target.value = phoneDigits(e.target.value); };
+    document.getElementById("checkoutForm").onsubmit = (e) => {
+      e.preventDefault();
+      const err = document.getElementById("formErr");
+      err.textContent = "";
+      const name = document.getElementById("name").value.trim();
+      const phone = phoneDigits(document.getElementById("phone").value);
+      const city = document.getElementById("city").value;
+      const district = document.getElementById("district").value.trim();
+      const notes = document.getElementById("notes").value.trim();
+      if (name.length < 3) { err.textContent = "اكتب الاسم أو اسم الورشة."; return; }
+      if (!isEgyptianMobile(phone)) { err.textContent = "رقم الموبايل لازم 11 رقم ويبدأ بـ 010 أو 011 أو 012 أو 015."; return; }
+      if (district.length < 2) { err.textContent = "اكتب الحي عشان التوصيل."; return; }
+      const order = placeOrder({ name, phone, city, district, notes });
+      if (!order) return;
+      location.hash = "#/order/" + order.id;
+    };
+
+    window.addEventListener("hashchange", route);
+    route();
+  </script>
+</body>
+</html>
